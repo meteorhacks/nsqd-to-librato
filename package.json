@@ -1,0 +1,27 @@
+{
+  "name": "nsqd-to-librato",
+  "version": "1.0.0",
+  "description": "Send NSQ stats to librato",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meteorhacks/nsqd-to-librato.git"
+  },
+  "keywords": [
+    "NSQ"
+  ],
+  "author": "Meteorhacks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meteorhacks/nsqd-to-librato/issues"
+  },
+  "homepage": "https://github.com/meteorhacks/nsqd-to-librato",
+  "dependencies": {
+    "envalid": "^0.1.0",
+    "librato-node": "^2.1.1",
+    "request": "^2.53.0"
+  }
+}
