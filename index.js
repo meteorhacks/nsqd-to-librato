@@ -29,6 +29,11 @@ process.once('SIGINT', function() {
   librato.stop();
 });
 
+// catch error events
+librato.on('error', function (e) {
+  console.error(e);
+});
+
 // start sending metrics
 sendMetrics();
 
