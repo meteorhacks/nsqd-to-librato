@@ -63,20 +63,18 @@ function processTopic(topic) {
   var curr = {
     count: topic.message_count,
     depth: topic.depth,
-    _time: Date.now(),
   };
 
   if(prevTopics[name]) {
     var prev = prevTopics[name];
-    var duration = (curr._time - prev._time)/1000;
     var stats = {
-      'ingress': (curr.count - prev.count)/duration,
-      'egress': (curr.count - prev.count - (curr.depth - prev.depth))/duration,
+      'ingress': curr.count - prev.count,
+      'egress': curr.count - prev.count - (curr.depth - prev.depth),
     };
 
     for(var key in stats) {
       var field = [prefix, name, key].join('-')
-      librato.measure(field, stats[key]);
+      librato.increment(field, stats[key]);
     }
   }
 
@@ -93,22 +91,18 @@ function processChannel (topicName, channel) {
   var curr = {
     count: channel.message_count,
     depth: channel.depth,
-    flight: channel.in_flight_count,
-    _time: Date.now(),
   };
 
   if(prevChannels[topicName] && prevChannels[topicName][name]) {
     var prev = prevChannels[topicName][name];
-    var duration = (curr._time - prev._time)/1000;
     var stats = {
-      'ingress': (curr.count - prev.count)/duration,
-      'egress': (curr.count - prev.count - (curr.depth - prev.depth))/duration,
-      'inflight': curr.flight - prev.flight,
+      'ingress': curr.count - prev.count,
+      'egress': curr.count - prev.count - (curr.depth - prev.depth),
     };
 
     for(var key in stats) {
       var field = [prefix, topicName, name, key].join('-')
-      librato.measure(field, stats[key]);
+      librato.increment(field, stats[key]);
     }
   }
 
